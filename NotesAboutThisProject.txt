@@ -17,3 +17,7 @@ install-package Microsoft.Owin.Host.SystemWeb
 
 ürüne eklenirken indirim oraný ürünün fiyatýndan daha büyük olamaz.
 
+------
+
+
+
