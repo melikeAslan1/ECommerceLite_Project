@@ -1,4 +1,4 @@
-﻿using ECommerceLiteWEntity.IdentityModels;
+﻿using ECommerceLiteEntity.IdentityModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerceLiteWEntity.Models
+namespace ECommerceLiteEntity.Models
 {
     [Table("Orders")]
     public class Order: Base<int>

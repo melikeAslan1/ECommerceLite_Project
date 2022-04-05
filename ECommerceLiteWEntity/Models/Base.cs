@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerceLiteWEntity.Models
+namespace ECommerceLiteEntity.Models
 {
     public abstract class Base<T> : IBase
     {

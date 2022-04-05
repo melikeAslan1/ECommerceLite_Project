@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerceLiteWEntity.Models
+namespace ECommerceLiteEntity.Models
 {
     [Table("Order Details")]
     public class OrderDetail: Base<int>

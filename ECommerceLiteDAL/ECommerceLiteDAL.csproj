@@ -87,12 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ECommerceLiteWEntity\ECommerceLiteEntity.csproj">
-      <Project>{595910f1-55f9-42b9-aee1-c97695ca2497}</Project>
-      <Name>ECommerceLiteEntity</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -100,6 +94,12 @@
     <EmbeddedResource Include="Migrations\202204041146001_initialDB.resx">
       <DependentUpon>202204041146001_initialDB.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ECommerceLiteWEntity\ECommerceLiteEntity.csproj">
+      <Project>{595910f1-55f9-42b9-aee1-c97695ca2497}</Project>
+      <Name>ECommerceLiteEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,5 +1,5 @@
-﻿using ECommerceLiteWEntity.IdentityModels;
-using ECommerceLiteWEntity.Models;
+﻿using ECommerceLiteEntity.IdentityModels;
+using ECommerceLiteEntity.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;

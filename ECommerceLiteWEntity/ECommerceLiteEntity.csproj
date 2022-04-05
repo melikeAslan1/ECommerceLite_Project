@@ -8,8 +8,8 @@
     <ProjectGuid>{595910F1-55F9-42B9-AEE1-C97695CA2497}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ECommerceLiteWEntity</RootNamespace>
-    <AssemblyName>ECommerceLiteWEntity</AssemblyName>
+    <RootNamespace>ECommerceLiteEntity</RootNamespace>
+    <AssemblyName>ECommerceLiteEntity</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
