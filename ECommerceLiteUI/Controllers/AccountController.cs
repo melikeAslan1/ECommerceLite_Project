@@ -432,7 +432,7 @@ namespace ECommerceLiteUI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
@@ -462,16 +462,26 @@ namespace ECommerceLiteUI.Controllers
 
                 var authManager = HttpContext.GetOwinContext().Authentication;
 
-                var UserIdentity = await myUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                var userIdentity = await myUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
 
-                authManager.SignIn(
+                //2. yol
+                AuthenticationProperties authProperties = new AuthenticationProperties();
+                authProperties.IsPersistent = model.RememberMe;
+                authManager.SignIn(authProperties, userIdentity);
 
-                 new AuthenticationProperties()
-                 {
-                     IsPersistent = model.RememberMe
-                 }, UserIdentity
 
-                 );
+
+                //1.Yol
+                //authManager.SignIn(
+
+                // new AuthenticationProperties()
+                // {
+                //     IsPersistent = model.RememberMe
+                // }, UserIdentity
+                // );
+
+                
+
 
                 //Giriş yaptı! Peki nereye gidecek?
                 //Herkes rolüne uygun default bir sayfaya gitsin.

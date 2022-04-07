@@ -1,0 +1,96 @@
+﻿@using ECommerceLiteUI.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="row margin-vert-30">
+
+    <!-- Login Start-->
+
+    <div class="col-md-6 col-md-offset-3 col-md-offset-3">
+        @Html.ValidationSummary()
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="login-header margin-bottom-30" align="center">
+                <h2 class="text-center">ECommerceLite 303'e HOŞGELDİNİZ!'</h2>
+                
+            </div>
+            <br />
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+
+                </span>
+                @Html.TextBoxFor(x => x.Email, new
+                {
+                    @class = "form-control"
+                    ,
+                    placeholder = "Emailinizi giriniz..."
+                })
+              
+
+            </div>
+
+            <br />
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+
+                </span>
+                @Html.TextBoxFor(x => x.Password, new
+                {
+                    @class = "form-control"
+                    ,
+                    placeholder = "Şifrenizi giriniz..."
+                })
+               
+
+            </div>
+
+            <br />
+
+            <div class="input-checkbox">
+                <input type="checkbox" id="rememberme" name="@Model.RememberMe"/>
+                <label for="rememberme">
+                    <span></span>
+                    Beni Hatırla ?
+                </label>
+
+            </div>
+            <br />
+
+            <div class="row">
+                <button type="submit" class="btn-default pull-right" style="background-color:burlywood; color=white;">Giriş Yap
+                </button> <a href="Account/Register" class="btn btn-default pull-left" style="background-color:white; color:#D10024;">Kayıt Ol </a>
+
+            </div>
+
+            <hr />
+
+            <h4 align="center">Şifrenizi mi unuttunuz?</h4>
+            <p align="center">
+                @Html.ActionLink("Yeni şifre Talebi için BURAYA Tıklayınız.",
+               "RecoverPassword", "Account")
+            </p>
+
+        }
+
+
+
+    </div>
+
+    <!--Login End -->
+
+
+</div>
+
+
+
+
+
+
