@@ -1,4 +1,4 @@
-﻿using ECommerceLiteWEntity.Enums;
+﻿//using ECommerceLiteWEntity.Enums;
 
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using ECommerceLiteEntity.Models;
 using ECommerceLiteUI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-//using ECommerceLiteEntity.Enums;
+using ECommerceLiteEntity.Enums;
 using System.Threading.Tasks;
 using ECommerceLiteEntity.ViewModels;
 
