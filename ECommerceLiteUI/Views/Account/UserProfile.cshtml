@@ -1,0 +1,107 @@
+﻿@using ECommerceLiteUI.Models
+@model ProfileViewModel
+
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="row margin-vert-30" style="margin-left:25%; margin-right:25%">
+    <div class="col-6 offset-3">
+        @using (Html.BeginForm("UserProfile", "Account", FormMethod.Post,
+            new { @class = "form-horizontal" }))
+        {
+            <span class="text-danger">@Html.ValidationSummary() </span>
+
+            @Html.AntiForgeryToken()
+
+            if (ViewBag.Result != null)
+            {
+                <blockquote>
+                    <p>
+                        <h4 style="text-align:center"> @ViewBag.Result</h4>
+                    </p>
+
+                </blockquote>
+            }
+            else
+            {
+                <h4 style="text-align: center">Bilgilerinizi değiştirip, güncelle butonuna tıklayabilirsiniz...</h4>
+            }
+
+            <div class="form-group col-4 offset-4">
+
+                @*TO DO: Proje bitince eklenebilir.*@
+
+                @*<div class="form-group">
+                        @Html.Label("Email Adresiniz")
+                        @Html.TextAreaFor(x=> x.Email, new {@class="form-control"})
+
+                    </div> <br/>*@
+
+                <div class="form-group">
+                    @Html.Label("Adınız")
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+
+                </div>
+                <br />
+                <div class="form-group">
+                    @Html.Label("Soyadınız")
+                    @Html.TextBoxFor(x => x.Surname, new { @class = "form-control" })
+
+                </div>
+                <br />
+
+                <div class="form-group">
+                    @Html.Label("Mevcut Şifreniz")
+                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+
+                </div>
+                <br />
+                <div class="pull-right">
+
+                    <button type="submit" class="btn btn-default"
+                            style="background-color:#10024; color:white">
+                        Profilimi Güncelle
+                    </button>
+
+                    @*NOTLAR*@
+
+                    @*a tagini kullanarak şifremi değiştire gitmek isterdeniz aşağıdaki kod yeterli. Scripte gerek yok.*@
+                    <a href="/Account/UpdatePassword"
+                       class="btn btn-default"
+                       style="background-color:#10024; color: white; margin-right:5px" >
+                        Şİfremi Değiştir
+                    </a>
+
+                    @*Normal buton kullanmak isterseniz click eventina script yazmalısınız.*@
+                    <input type="button"
+                           value="Şifremi Değiştir"
+                           class="btn btn-default"
+                           style="background-color:#D10024; color:white;
+                           margin-right:5px"
+                           onclick="Gotoupdatepasswordpage()" />       
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+
+</div>
+
+@section Scripts {
+    
+    <script>
+        function Gotoupdatepasswordpage() {
+            window.location.assign("/Account/UpdatePassword")
+        }
+    </script>
+    
+    }
+
+
+
+
+

@@ -71,7 +71,7 @@ namespace ECommerceLiteUI.Controllers
                     Name = model.Name,
                     Surname = model.Surname,
                     Email = model.Email,
-                    UserName = model.TCNumber,
+                    UserName = model.Email,
                     ActivationCode = activationCode
                 };
 
@@ -213,7 +213,7 @@ namespace ECommerceLiteUI.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UserProfile(ProfileViewModel model)
@@ -283,7 +283,7 @@ namespace ECommerceLiteUI.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
 
@@ -366,12 +366,12 @@ namespace ECommerceLiteUI.Controllers
             {
                 //Şifresini unutmuş. 
                 //1.Yöntem
-                // var user = myUserStore.Context.Set<ApplicationUser>()
-                //     .FirstOrDefault(x => x.Email == model.Email);
-                //myUserManager.FindByEmail(model.Email);
+                 var user = myUserStore.Context.Set<ApplicationUser>()
+                     .FirstOrDefault(x => x.Email == model.Email);
+                myUserManager.FindByEmail(model.Email);
 
                 //2.Yöntem
-                var user = myUserManager.FindByEmail(model.Email);
+                //var user = myUserManager.FindByEmail(model.Email);
                 if(user==null)
                 {
                     ViewBag.RecoverPassword = "Sistemde böyle bir kullanıcı olmadığı için size yeni şifre gönderemiyoruz!" +
@@ -456,7 +456,7 @@ namespace ECommerceLiteUI.Controllers
                     ViewBag.Result = "Sistemi kullanmak için aktivasyon yapmanız gerekmektedir!" +
                         "Emailinize gönderilen aktivasyon linkine tıklayınız!";
                     // TO DO: Zaman kalırsa Email Gönder adında küçük bir buton burada olsun
-                    return View();
+                    return View(model);
                 }
                 //Artık login olabilir
 

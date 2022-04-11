@@ -16,7 +16,7 @@ namespace ECommerceLiteEntity.IdentityModels
         // IdentityUser class ı ile bize sunulan AspNetUsers tablosundaki kolonları genişletmek için kolonları aldık.
         // Aşağıya ihtiyacımız olan kolonları ekledik.
 
-        [Required]  //mutlaka olması gereken. bi siteye girince yazmak zorundasın kısmı
+        [Required]  //mutlaka olması gereken. bi siteye girince yazmak zorundasın kısmı // zorunlu alan.
         [Display(Name="Ad")]
         [StringLength(maximumLength:30, MinimumLength =2, ErrorMessage ="İsminizin Uzunluğu 2 ile 30 karakter aralığında olmalıdır!")]
         public string Name { get; set; }
@@ -38,6 +38,9 @@ namespace ECommerceLiteEntity.IdentityModels
         // isteyen birthDate gibi bir alan da ekleyebilir.
 
         public virtual List<Admin> AdminList { get; set; }
+
+       // public int yas { get; set; }
+
 
         public virtual List<Customer>  CustomerList { get; set; }
 
