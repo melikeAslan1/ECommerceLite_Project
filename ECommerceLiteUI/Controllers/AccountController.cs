@@ -416,6 +416,15 @@ namespace ECommerceLiteUI.Controllers
         {
             try
             {
+                // Zaten giriş yapmış biri bu sayfayı tekrar çağırdığında Home-Index e gitsin.
+                if(MembershipTools.GetUser()!=null)
+                {
+                    // TO DO: Acaba kişinin gittiği URL'yi tutup oraya geri gönderme nasıl yaparız ?
+                    return RedirectToAction("Index", "Home");
+                }
+
+
+
                 // TO DO: sayfa patlamazsa if kontrolüne gerek yok! Test ederken bakacağız.
                 var model = new LoginViewModel()
                 {
@@ -540,7 +549,7 @@ namespace ECommerceLiteUI.Controllers
             Session.Clear();
             var user = MembershipTools.GetUser();
             HttpContext.GetOwinContext().Authentication.SignOut();
-            return RedirectToAction("LOgin", "Account"
+            return RedirectToAction("Login", "Account"
                 , new { email = user.Email });
         }
 
