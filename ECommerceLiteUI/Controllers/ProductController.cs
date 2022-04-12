@@ -15,6 +15,13 @@ namespace ECommerceLiteUI.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            //
+            return View();
+        }
+
 
     }
 }
