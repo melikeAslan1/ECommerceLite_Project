@@ -54,14 +54,14 @@
 
                 <div class="form-group">
                     @Html.Label("Mevcut Şifreniz")
-                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control", type="password" })
 
                 </div>
                 <br />
                 <div class="pull-right">
 
                     <button type="submit" class="btn btn-default"
-                            style="background-color:#10024; color:white">
+                            style="background-color:#D10024; color:white">
                         Profilimi Güncelle
                     </button>
 
@@ -70,7 +70,7 @@
                     @*a tagini kullanarak şifremi değiştire gitmek isterdeniz aşağıdaki kod yeterli. Scripte gerek yok.*@
                     <a href="/Account/UpdatePassword"
                        class="btn btn-default"
-                       style="background-color:#10024; color: white; margin-right:5px" >
+                       style="background-color:#D10024; color: white; margin-right:5px" >
                         Şİfremi Değiştir
                     </a>
 

@@ -7,7 +7,7 @@ using System.Web;
 namespace ECommerceLiteUI.Models
 {
     public class RegisterViewModel
-    {//Kayıt Modeli içinde siteye kayıt olmak isteyen kişilerden hangi bilgileri alacağımız belirleyeceğiz
+    {   //Kayıt Modeli içinde siteye kayıt olmak isteyen kişilerden hangi bilgileri alacağımız belirleyeceğiz
         // TCKimlik, İsim soyisim email (eğer yazdıysak telefon, cinsiyet vb)  alanlarını tanımlayalım
 
         //Not: Data Annotation'ları kullanarak validation kurallarını belirlediğimiz için
