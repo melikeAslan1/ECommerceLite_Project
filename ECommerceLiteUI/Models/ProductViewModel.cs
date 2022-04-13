@@ -74,8 +74,50 @@ namespace ECommerceLiteUI.Models
 
             //}
 
-            
         }
+
+        public void GetCategory()
+            {
+               if(CategoryId> 0)
+            {
+                // ÖRN: Elektronik kat. ---> Akıllı telefon kat. --> ürün (iphone 13 pro
+                Category=myCategoryRepo.GetById(CategoryId);
+                //Akıllı telefon kat artık elimde!
+                //Akıllı telefon kat. bir üst kategorisi var mı ?
+                //ÖRN: Elek--> Akıllı tel --> apple giller olsaydı eğer döngü ile tepeye kadar çıkacağız.
+
+                if(Category.BaseCategoryId!=null && Category.BaseCategoryId>0)
+                  {
+                    Category.CategoryList = new List<Category>();
+                    Category.BaseCategory = myCategoryRepo.GetById(Category.BaseCategoryId.Value);
+                    Category.CategoryList.Add(Category.BaseCategory);
+
+                    bool isOver = false;
+                    Category baseCategory = Category.BaseCategory;
+                    while(!isOver)
+                    {
+                        if(baseCategory.BaseCategoryId>0)
+                        {
+                            Category.CategoryList.Add(
+                                myCategoryRepo.GetById
+                                (baseCategory.BaseCategoryId.Value));
+
+                            baseCategory = myCategoryRepo.GetById(baseCategory.BaseCategoryId.Value);
+                        }
+                        else
+                        {
+                            isOver = true;
+                        }
+                    }
+
+                    Category.CategoryList=Category.CategoryList.OrderBy(x=> x.Id).ToList();
+
+                  }
+            }
+              
+
+            }
+
 
 
 
