@@ -57,7 +57,7 @@ namespace ECommerceLiteUI.Models
         public List<ProductPicture> ProductPictureList { get; set; }
 
         //Ürün eklenirken ürüne ait resimler secilebilir. Secilen Resimleri hafızada tutacak property.
-        public List<HttpPostedFileBase> File { get; set; } = new List<HttpPostedFileBase>();
+        public List<HttpPostedFileBase> Files { get; set; } = new List<HttpPostedFileBase>();
 
         public void GetProductPicture()
         {

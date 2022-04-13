@@ -1,0 +1,138 @@
+﻿@using ECommerceLiteUI.Models
+@model ProductViewModel
+
+@{
+    ViewBag.Title = "Yeni Kayıt";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post,
+
+    new
+    {
+        @class = "form-horizontal",
+        enctype = "multipart/form-data"
+    }))
+{
+    @Html.AntiForgeryToken()
+<div class="col-md-6 offset-3">
+
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    @*<span class="text-danger">@Html.ValidationSummary()</span>*@  @*aynı sey kapattım birini*@
+
+    <div class="form-group">
+        @Html.Label("Ürün Adı:")
+        @Html.TextBoxFor(x => x.ProductName, new { @class = "form-control" })
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Ürün Açıklaması:")
+        @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Kategorisi:")
+        @Html.DropDownListFor(x => x.CategoryId,
+          (List<SelectListItem>)ViewBag.SubCategories
+       , new { @class = "form-control" })
+
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Ürün Kod:")
+        @Html.TextBoxFor(x => x.ProductCode, new
+   {
+       @class = "form-control",
+            type = "number",
+       min = 0
+   })
+
+
+    </div>
+
+    @*<div class="form-group">
+        @Html.Label("İndirim Oranı:")
+        @Html.TextBoxFor(x => x.Discount, new
+   {
+       @class = "form-control",
+            type = "number",
+       min = 0,
+            max = 100
+   })
+
+
+    </div>*@
+
+    <div class="form-group">
+        @Html.Label("Ürün Fiyatı:")
+        @Html.TextBoxFor(x => x.Price, new
+   {
+       @class = "form-control",
+            type = "number",
+       min = 0,
+
+   })
+
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("İndirim Oranı:")
+        @Html.TextBoxFor(x => x.Discount, new
+   {
+       @class = "form-control",
+            type = "number",
+       min = 0,
+            max = 100
+   })
+
+
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Stok:")
+        @Html.TextBoxFor(x => x.Quantity, new
+   {
+       @class = "form-control",
+            type = "number",
+            min = 0,
+            value = "0"
+   })
+
+
+    </div>
+
+    <div class="form-group col-md-12">
+        @Html.Label("Ürün Fotoğrafları:")
+        @Html.TextBoxFor(x=> x.File, new { 
+      @class="form-control", 
+      type="file",
+      multiple=true,
+      style="padding-bottom:40px; padding-top:10px"
+    })
+
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-info" style="float:right">
+            Kaydet
+        </button>
+
+
+    </div>
+
+    <div>
+        @Html.ActionLink("Listeye Geri Dön", "ProductList","Product")
+
+    </div>
+
+
+</div>
+
+
+
+
+}
