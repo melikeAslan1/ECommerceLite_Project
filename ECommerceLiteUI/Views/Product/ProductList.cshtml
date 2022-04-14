@@ -1,24 +1,96 @@
-﻿@{
+﻿@using ECommerceLiteEntity.Models
+@model List<Product>
+@{
     ViewBag.Title = "ProductList";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-<h2>Ürünler</h2>
+<h2>Sistemdeki Ürünler</h2>
 <br />
 <div class="col-12">
-    Buraya arama textbox'ı gelecek.
+ 
+    @using (Html.BeginForm("ProductList", "Product", FormMethod.Get))
+            {
+                <p>
+                    <b>Ürün Adı:</b>  @Html.TextBox("search")
+                    <input type="submit" value="Ara" class="btn btn-info btn-sm"/>
+                </p>
+            }
+
+
 
 </div>
 <div class="col-12">
     <div class="card">
-        <div class="card-header">  @*arka plana beyaz seyi attı.*@
+        <div class="card-header">
+            @*arka plana beyaz seyi attı.*@
             <a href="/Product/Create"
-                class="btn btn-info"
-               style="margin-left:5px;">  @*soldan 5 px bosluk ver*@
-               Yeni Ürün Ekle
-               
+               class="btn btn-info"
+               style="margin-left:5px;">
+                @*soldan 5 px bosluk ver*@
+                Yeni Ürün Ekle
+
             </a>
 
         </div>
 
+        <div class="card-body">
+            @*table nesnesi ile ürünlerimizi sergileyeceğiz*@
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Açıklaması</th>
+                        <th>Kategori</th>
+                        <th>Kayıt Tarihi</th>
+                        <th>Birim Fiyatı</th>
+                        <th>İndirim Oranı(%)</th>
+                        <th>Stok Adeti</th>
+                        <th>İşlemler</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.Description</td>
+                            <td>@item.Category.CategoryName</td>
+                            <td>@item.RegisterDate</td>
+                            <td>@item.Price</td>
+                            <td>@item.Discount</td>
+                            <td>@item.Quantity</td>
+
+                            <td>
+                                @*@buraya sil düzenle ürünün resmine git gibi buttonlar gelir.*@
+                                <a href="/Product/Delete" class="btn btn-sm btn-danger"
+                                   style="margin-left:5px">
+                                    Sil
+                                </a>
+
+                                <a href="/Product/ProductPictures"
+                                   class="btn btn-sm btn-primary"
+                                   style="margin-left:5px">
+                                    Ürün Resimleri
+                                </a>
+
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+
+        </div>
+
     </div>
+
+
 </div>
+
+
+

@@ -20,9 +20,23 @@ namespace ECommerceLiteUI.Controllers
 
         //Bu controller a Admin gibi yetkili kişiler erişecektir.
         //Burada ürünlerin listelenmesi, ekleme, silme, güncelleme işlemleri yapılacaktır.
-        public ActionResult ProductList()
+        public ActionResult ProductList(string search="")   //başında bişey yoksa otomatik httpget tir. httppost unu yazmayacaksan bu action un yazmana gerek yok.
         {
-            return View();
+            List<Product> allProducts = new List<Product>();
+        
+            //var allProducts = myProductRepo.GetAll();
+
+            if(string.IsNullOrEmpty(search))
+            {
+               allProducts = myProductRepo.GetAll();
+            }
+            else
+            {
+                allProducts=myProductRepo.GetAll().Where(x=> x.ProductName.Contains(search) || x.Description.Contains(search)).ToList();
+            }
+
+            return View(allProducts);
+           // return View(myProductRepo.GetAll());
         }
 
         [HttpGet]
