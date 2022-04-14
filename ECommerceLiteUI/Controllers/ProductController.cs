@@ -82,6 +82,18 @@ namespace ECommerceLiteUI.Controllers
                     return View(model);
                 }
 
+                //Burada kontrol lazım 
+                //Acaba girdiği ürün kodu bizim db de zaten var mı?
+                //metodsuz
+
+                if(myProductRepo.IsSameProductCode(model.ProductCode)) // model state?
+                {
+                    ModelState.AddModelError("", "Dikkat! Girdiğiniz ürün kodu sistemdeki bir başka ürüne aittir. Ürün kodları benzersiz olmalıdır");
+
+                    return View(model);
+                }
+               
+
                 //Ürün tabloya kayıt olacak. 
                 //TODO: Mapleme yapılacak.
 
@@ -118,11 +130,11 @@ namespace ECommerceLiteUI.Controllers
                             {
                                 string filename = SiteSettings.StringCharacterConverter(model.ProductName).ToLower().Replace("-", "");
 
-                                string extensionName = Path.GetExtension(item.FileName);   //kaldım.
+                                string extensionName = Path.GetExtension(item.FileName);   //uzantı adı. kaldım.
 
-                                string directoryPath = Server.MapPath($"~/ProductPictures/{filename}/{model.ProductCode}");
+                                string directoryPath = Server.MapPath($"~/ProductPictures/{filename}/{model.ProductCode}");  // klasör yolu. ?
 
-                                string guid = Guid.NewGuid().ToString().Replace("-", "");
+                                string guid = Guid.NewGuid().ToString().Replace("-", "");  // guid ın benzersiz olması gerekiyor değil mi?
 
                                 string filePath = Server.MapPath($"~/ProductPictures/{filename}/{model.ProductCode}/") + filename + "-" + counter + "-" + guid + extensionName;
 
