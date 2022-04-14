@@ -7,7 +7,6 @@
 <h2>Sistemdeki Ürünler</h2>
 <br />
 <div class="col-12">
- 
     @using (Html.BeginForm("ProductList", "Product", FormMethod.Get))
             {
                 <p>
@@ -15,9 +14,6 @@
                     <input type="submit" value="Ara" class="btn btn-info btn-sm"/>
                 </p>
             }
-
-
-
 </div>
 <div class="col-12">
     <div class="card">
@@ -28,11 +24,8 @@
                style="margin-left:5px;">
                 @*soldan 5 px bosluk ver*@
                 Yeni Ürün Ekle
-
             </a>
-
         </div>
-
         <div class="card-body">
             @*table nesnesi ile ürünlerimizi sergileyeceğiz*@
 
@@ -47,50 +40,133 @@
                         <th>İndirim Oranı(%)</th>
                         <th>Stok Adeti</th>
                         <th>İşlemler</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@item.ProductName</td>
+                            <td>
+                                <button class="btn btn-sm btn-info"
+                                        onclick="ProductBtnClicked(@item.Id)"
+                                        data-toggle="modal"
+                                        data-target="#myModal" >
+                                        
+                                    @item.ProductName
+                                </button>
+                            </td>
                             <td>@item.Description</td>
                             <td>@item.Category.CategoryName</td>
                             <td>@item.RegisterDate</td>
                             <td>@item.Price</td>
                             <td>@item.Discount</td>
                             <td>@item.Quantity</td>
-
                             <td>
                                 @*@buraya sil düzenle ürünün resmine git gibi buttonlar gelir.*@
                                 <a href="/Product/Delete" class="btn btn-sm btn-danger"
                                    style="margin-left:5px">
                                     Sil
                                 </a>
-
                                 <a href="/Product/ProductPictures"
                                    class="btn btn-sm btn-primary"
                                    style="margin-left:5px">
                                     Ürün Resimleri
                                 </a>
-
                             </td>
-
-
                         </tr>
                     }
                 </tbody>
-
             </table>
+        </div>
+    </div>
+</div>
 
+@*modal pop up ın güzel hali, bootstrap li hali.*@
+
+@*Modal Baslangıcı*@
+
+<div class="modal fade col-md-12" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        @*Modal Content baslangıcı*@
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ürün Detay</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <div class="modal-body" id="form-modal">
+                @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="col-md-12">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="col-md12">
+                        <input type="hidden" name="Id" id="ProductId" />
+                        <div class="form-group">
+                            @Html.Label("Ürün Adı:")
+                            <input id="ProductName" name="ProductName" class="form-control" />
+
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Ürün Açıklaması:")
+                            <input id="Description" name="Description" class="form-control" />
+
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Ürün Kodu:")
+                            <input id="ProductCode" name="ProductCode" class="form-control" />
+
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Stok:")
+                            <input id="Quantity" name="Quantity" class="form-control" />
+
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Fiyat:")
+                            <input id="Price" name="Price" class="form-control" />
+
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("İndirim(%):")
+                            <input id="Discount" name="Discount" class="form-control" />
+
+                        </div>
+                        <div class="form-group">
+                            <input type="button" value="KAPAT" class="btn btn-danger"
+                                   data-dismiss="modal" style="float:left" />
+                            <input type="button" value="GÜNCELLE" class="btn btn-info"
+                                   style="float:right" />
+
+
+                        </div>
+                    </div>
+                }
+            </div>
 
         </div>
 
-    </div>
 
+        @*Model content bitiş*@
+
+    </div>
 
 </div>
 
+@*Modal bitişi*@
+
+@section scripts {
+<script>
+    function ProductBtnClicked(id) {
+
+    }
+</script>
+} 
 
 
