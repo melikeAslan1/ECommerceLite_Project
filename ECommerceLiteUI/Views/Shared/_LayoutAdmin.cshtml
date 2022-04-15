@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ECommerceLite303</title>
+    <title>ECommerceLite 303</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="~/AdminLTE/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -44,10 +47,7 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="index3.html" class="nav-link">Home</a>
                 </li>
-                
             </ul>
-
-           
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
@@ -56,12 +56,14 @@
             <a href="index3.html" class="brand-link">
                 <img src="~/AdminLTE/dist/img/303Logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                      style="opacity: .8">
-                <span class="brand-text font-weight-light">303 Admin Paneli</span>
+                <span class="brand-text font-weight-light">
+                    Admin Paneli
+                </span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
-            @*buraya sol taraftaki menü gelecek.*@
+                @*Buraya sol taraftaki menü gelecek*@
             </div>
             <!-- /.sidebar -->
         </aside>
@@ -72,22 +74,17 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                     
                         <div class="col-12">
                             @RenderBody()
                         </div>
-
-
 
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-           
+            <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-        
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -129,6 +126,6 @@
     <script src="~/AdminLTE/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/AdminLTE/dist/js/demo.js"></script>
-    @RenderSection("scripts", required:false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>

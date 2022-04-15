@@ -27,8 +27,6 @@ namespace ECommerceLiteEntity.Models
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
 
-
-
         //özellikler
 
         [Required]
