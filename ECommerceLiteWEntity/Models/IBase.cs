@@ -10,11 +10,8 @@ namespace ECommerceLiteEntity.Models
 {
     public interface IBase
     {
-
-         DateTime RegisterDate { get; set; }
-
-
-
+        DateTime RegisterDate { get; set; }
+        bool IsDeleted { get; set; }
 
     }
 }

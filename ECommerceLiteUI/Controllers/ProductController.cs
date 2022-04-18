@@ -87,7 +87,7 @@ namespace ECommerceLiteUI.Controllers
         {
             //Sayfayı çağırırken ürünün kategorisinin ne olduğu seçmesi lazım
             //Bu nedenle sayfaya kategoriler gitmeli
-            List<SelectListItem> subCategories = new List<SelectListItem>();  // selectListItem a drop down list denir mvc de.
+            List<SelectListItem> subCategories = new List<SelectListItem>();
             //Linq
             //select * from Categories where BaseCategoryId is not null
 
@@ -122,14 +122,13 @@ namespace ECommerceLiteUI.Controllers
 
                 ViewBag.SubCategories = subCategories;
 
-                if (!ModelState.IsValid)   // kullanıcı girişinin doğrulanma olayı.
+                if (!ModelState.IsValid)
                 {
                     ModelState.AddModelError("", "Veri girişleri düzgün olmalıdır");
                     return View(model);
                 }
 
-                if (model.CategoryId <= 0 ||
-                    model.CategoryId > myCategoryRepo.GetAll().Count())
+                if (model.CategoryId <= 0)
                 {
                     ModelState.AddModelError("", "Ürüne ait kategori seçilmelidir!");
                     return View(model);
@@ -167,7 +166,7 @@ namespace ECommerceLiteUI.Controllers
                 //Core projesinde daha profesyonel olan AutoMapper'ı kullanacağız
                 // Bir dto objesinin içindeki verileri alır asıl objenin içine aktarır. Asıl objenin verilerini dto objesinin içindeki propertylere aktarır.
                 //Product product = model.Adapt<Product>();
-                //Product product2 = model.Adapt<ProductViewModel,Product>(); //ikisi aynı birini kapattım.
+                //Product product2 = model.Adapt<ProductViewModel,Product>();
 
                 int insertResult = myProductRepo.Insert(product);
                 if (insertResult > 0)
@@ -177,78 +176,66 @@ namespace ECommerceLiteUI.Controllers
                     // resimlerin yollarını kayıt et
                     if (model.Files.Any() && model.Files[0] != null)
                     {
-                        ProductPicture productPicture = new ProductPicture();
-                        productPicture.ProductId = product.Id;
-                        productPicture.RegisterDate = DateTime.Now;
-                        int counter = 1; // Bizim sistemde resim adeti 5
-                                         // olarak belirlendiği için   //ilk olarak model.Files a img nin geçişi nerede oluyor. 
-
+                        int pictureinsertResult = 0;
                         foreach (var item in model.Files)
                         {
-                            if (counter == 5) break;
-
-                            if (item != null && item.ContentType.Contains("image") &&
-                                item.ContentLength > 0)
+                            if (item != null && item.ContentType.Contains("image")
+                                && item.ContentLength > 0)
                             {
-                                string filename =
-                                    SiteSettings
-                                    .StringCharacterConverter(model.ProductName).
-                                    ToLower().Replace("-", "");
-                                string extensionName = Path.GetExtension(item.FileName); //uantı adı.
-                                string directoryPath =  //klasör yolu.
-                                    Server.MapPath($"~/ProductPictures/{filename}/{model.ProductCode}");
-                                string guid = Guid.NewGuid().ToString().Replace("-", "");  // guid in benzersiz olması gerekiyor.
-                                string filePath =
-                                    Server.MapPath($"~/ProductPictures/{filename}/{model.ProductCode}/")
-                                    + filename + "-" + counter + "-" + guid + extensionName;
+                                string productName = SiteSettings.StringCharacterConverter(model.ProductName).ToLower().Replace("-", "");
+                                string extensionName = Path.GetExtension(item.FileName);
+                                //Klasör adresi : ProductPictures/iphone13/20202020
+                                string directoryPath = Server.MapPath
+                                    ($"~/ProductPictures/{productName}/{model.ProductCode}");
+                                string guid = Guid.NewGuid().ToString().Replace("-", "");
+                                //ProductPictures/iphone13/20202020/iphone13-guid.jpg
+                                string filePath = Server.MapPath
+                                    ($"~/ProductPictures/{productName}/{model.ProductCode}/" +
+                                    $"{productName}-{guid}{extensionName}");
                                 if (!Directory.Exists(directoryPath))
                                 {
                                     Directory.CreateDirectory(directoryPath);
                                 }
+                                //resmi o klasöre kayıt edelim
                                 item.SaveAs(filePath);
-                                //TODO : Buraya birisi çeki düzen verse süper olur
-                                if (counter == 1)
+                                //İşlem bitti DB'ye kayıt olacak
+                                ProductPicture picture = new ProductPicture()
                                 {
-                                    productPicture.ProductPicture1 =
-                                       $"/ProductPictures/{filename}/{model.ProductCode}/"
-                                    + filename + "-" + counter + "-" + guid + extensionName;
-                                }
-                                if (counter == 2)
-                                {
-                                    productPicture.ProductPicture2 =
-                                       $"/ProductPictures/{filename}/{model.ProductCode}/"
-                                    + filename + "-" + counter + "-" + guid + extensionName;
-                                }
-                                if (counter == 3)
-                                {
-                                    productPicture.ProductPicture3 =
-                                       $"/ProductPictures/{filename}/{model.ProductCode}/"
-                                    + filename + "-" + counter + "-" + guid + extensionName;
-                                }
+                                    ProductId = product.Id,
+                                    RegisterDate = DateTime.Now,
+                                    Picture = $"/ProductPictures/{productName}/{model.ProductCode}/" +
+                                    $"{productName}-{guid}{extensionName}",
+                                    IsDeleted = false
+                                };
+                                pictureinsertResult += myProductPictureRepo.Insert(picture);
                             }
-                            counter++;
+
                         }
-                        //TO DO: Yukarıyı for'a dönüştürebilir miyiz?
-                        //for (int i = 0; i < model.Files.Count; i++)
-                        //{
-                        //}
-                        int productPictureInsertResult =
-                            myProductPictureRepo.Insert(productPicture);
-                        if (productPictureInsertResult > 0)
+                        // pictureinsertResult kontrol edilecektir
+                        if (pictureinsertResult > 0 && model.Files.Count == pictureinsertResult)
                         {
+                            //bütün resimler eklenmiş
+                            TempData["ProductInsertSuccess"] = "Yeni ürün eklenmiştir";
+                            return RedirectToAction("ProductList", "Product");
+                        }
+                        else if (pictureinsertResult > 0 && model.Files.Count != pictureinsertResult)
+                        {
+                            //eksik eklemiş
+                            TempData["ProductInsertWarning"] = "Yeni ürün eklendi ama resimlerden bazıları beklenmedik bir sorun yüzünden eklenemedi! Eklenilemeyen resimleri daha sonra tekrar ekleyiniz.";
+
                             return RedirectToAction("ProductList", "Product");
                         }
                         else
                         {
-                            ModelState.AddModelError("",
-                                "Ürün eklendi ama ürüne ait fotoğraf(lar) eklenirken beklenmedik bir hata oluştu! Ürününüzün fotoğraflarını daha sonra tekrar eklemeyi deneyebilirsiniz...");
-                            return View(model);
+                            // ürünü ekledi ama resimlerini eklemedi
+                            TempData["ProductInsertWarning"] = "Yeni ürün eklendi ama ürüne ait resimler eklenemedi. Resimleri daha sonra tekrar eklemeyi deneyiniz";
+                            return RedirectToAction("ProductList", "Product");
                         }
-
 
                     }
                     else
                     {
+                        TempData["ProductInsertSuccess"] = "Yeni ürün eklenmiştir";
                         return RedirectToAction("ProductList", "Product");
                     }
                 }

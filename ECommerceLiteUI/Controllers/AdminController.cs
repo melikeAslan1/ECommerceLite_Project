@@ -8,6 +8,7 @@ namespace ECommerceLiteUI.Controllers
 {
     public class AdminController : Controller
     {
+        
       
     }
 }

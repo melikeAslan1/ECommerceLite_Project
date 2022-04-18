@@ -8,6 +8,15 @@
 
 <h2>Sistemdeki Ürünler</h2>
 <br />
+@if (TempData["ProductInsertSuccess"] != null)
+{
+    <div class="callout callout-success">@TempData["ProductInsertSuccess"]</div>
+}
+@if (TempData["ProductInsertWarning"] != null)
+{
+    <div class="callout callout-warning">@TempData["ProductInsertWarning"]</div>
+}
+
 @if (TempData["EditSuccess"] != null)
 {
     <div class="callout callout-success">
@@ -45,7 +54,6 @@
             </a>
         </div>
         <div class="card-body">
-            @*table nesnesi ile ürünlerimizi sergileyeceğiz.*@
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -72,7 +80,7 @@
                                 </button>
                             </td>
                             <td>@item.Description</td>
-                            <td>@item.Category.CategoryName</td>
+                            <td>@item.CategoryId</td>
                             <td>@item.RegisterDate</td>
                             <td>@item.Price</td>
                             <td>@item.Discount</td>
@@ -129,7 +137,6 @@
         </div>
     </div>
 </div>
-@*modal pop up ın güzel hali, bootstrapli hali.*@
 
 <!--Modal Başlangıcı -->
 <div class="modal fade col-md-12" id="myModal" role="dialog">
@@ -263,6 +270,3 @@
         }
     </script>
 }
-© 2022 GitHub, Inc.
-
-

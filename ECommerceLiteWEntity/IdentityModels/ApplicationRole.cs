@@ -12,6 +12,7 @@ namespace ECommerceLiteEntity.IdentityModels
     {
         [StringLength(200)]
         public string Description { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
 
 
