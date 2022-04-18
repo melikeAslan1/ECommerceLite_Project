@@ -1,12 +1,11 @@
 ﻿@using ECommerceLiteBLL.Account
 
-
 @{
-    Layout = null;  // yani bu sayfa layout kullanmayacak. Kendisi layout.
+    Layout = null;
 }
 
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,7 +20,7 @@
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="~/ElectroTheme/css/bootstrap.min.css" />
 
-    <!-- Slick --> <!--kaygan-->
+    <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="~/ElectroTheme/css/slick.css" />
     <link type="text/css" rel="stylesheet" href="~/ElectroTheme/css/slick-theme.css" />
 
@@ -59,12 +58,13 @@
                     @if (MembershipTools.GetUser() != null)
                     {
                         <li>
-                            <a href="Account/UserProfile">
+                            <a href="/Account/UserProfile">
                                 <i class="fa fa-user"></i>
                                 @(MembershipTools.GetNameSurname())
                             </a>
                         </li>
-                        <li><a href="/Account/Logout"><i class="fa fa-sign-out"></i> Çıkış Yap</a></li>
+                        <li><a href="/Account/Logout"><i class="fa fa-sign-out"></i> ÇIKIŞ YAP</a></li>
+
                     }
                     else
                     {
@@ -73,14 +73,13 @@
                                 <i class="fa fa-registered"></i>Kayıt Ol
                             </a>
                         </li>
-                        <li><a href="/Account/Login"><i class="fa fa-sign-in"></i> Giriş Yap</a></li>
+                        <li><a href="/Account/Login"><i class="fa fa-sign-in"></i>GİRİŞ YAP</a></li>
                     }
 
                 </ul>
             </div>
         </div>
         <!-- /TOP HEADER -->
-        
         <!-- MAIN HEADER -->
         <div id="header">
             <!-- container -->
@@ -190,10 +189,7 @@
         <div class="container">
             <!-- row -->
             <div class="row">
-
                 @RenderBody()
-
-
             </div>
             <!-- /row -->
         </div>
@@ -302,11 +298,7 @@
     <script src="~/ElectroTheme/js/jquery.zoom.min.js"></script>
     <script src="~/ElectroTheme/js/main.js"></script>
 
-    @RenderSection("scripts", required: false)
-
-
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>
-
-

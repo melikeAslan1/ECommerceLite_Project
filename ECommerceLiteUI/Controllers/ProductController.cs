@@ -12,6 +12,8 @@ using Mapster;
 
 namespace ECommerceLiteUI.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class ProductController : Controller
     {
         CategoryRepo myCategoryRepo = new CategoryRepo();
@@ -81,6 +83,7 @@ namespace ECommerceLiteUI.Controllers
 
             return View(allProducts);
         }
+
 
         [HttpGet]
         public ActionResult Create()
