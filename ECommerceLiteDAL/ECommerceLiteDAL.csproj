@@ -79,8 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\202204041146001_initialDB.cs" />
-    <Compile Include="Migrations\202204041146001_initialDB.designer.cs">
+    <Compile Include="Migrations\202204041146001_initialDB.Designer.cs">
       <DependentUpon>202204041146001_initialDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202204190717470_ProductPicturesTableUpdated.cs" />
+    <Compile Include="Migrations\202204190717470_ProductPicturesTableUpdated.designer.cs">
+      <DependentUpon>202204190717470_ProductPicturesTableUpdated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MyContext.cs" />
@@ -91,15 +95,19 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202204041146001_initialDB.resx">
-      <DependentUpon>202204041146001_initialDB.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ECommerceLiteWEntity\ECommerceLiteEntity.csproj">
       <Project>{595910f1-55f9-42b9-aee1-c97695ca2497}</Project>
       <Name>ECommerceLiteEntity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202204041146001_initialDB.resx">
+      <DependentUpon>202204041146001_initialDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202204190717470_ProductPicturesTableUpdated.resx">
+      <DependentUpon>202204190717470_ProductPicturesTableUpdated.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

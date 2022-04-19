@@ -55,6 +55,46 @@
                 <ul class="header-links pull-right">
                     <!--Buraya partial gelecek..-->
 
+                    @{
+                        var user = MembershipTools.GetUser();
+                        if (user != null)
+
+                        {
+                            if (MembershipTools.NewUserManager().IsInRoleAsync(
+                            user.Id, ECommerceLiteEntity.Enums.Roles.Admin.ToString()).Result)
+
+                            {
+
+                                <li>
+
+                                    <a href="/Admin/Dashboard" class="btn btn-default"
+                                       style="background-color:#d10024; color:white;">
+                                        ADMİN PANELİ
+                                    </a>
+
+                                </li>
+
+
+
+
+
+
+                            }
+
+                        }
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
                     @if (MembershipTools.GetUser() != null)
                     {
                         <li>
