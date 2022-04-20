@@ -12,24 +12,23 @@ namespace ECommerceLiteUI.Controllers
     {
         CategoryRepo myCategoryRepo = new CategoryRepo();
         ProductRepo myProductRepo = new ProductRepo();
+
         public ActionResult Index()
         {
-            //Ana kategorileri viewbag ile sayfaya gönderelim.
-            var categoryList = myCategoryRepo.AsQueryable().Where(x => x.BaseCategoryId == null).Take(4).ToList();
+            // Ana kategorilerden 4 tanesini viewbag ile sayfaya gönderelim
+            var categoryList = myCategoryRepo.AsQueryable()
+                .Where(x => x.BaseCategoryId == null).Take(3).ToList();
 
-            ViewBag.CategoryList = categoryList.OrderByDescending(x => x.Id);
+            ViewBag.CategoryList = categoryList.OrderByDescending(x => x.Id).ToList();
 
-            //Ürünler
-            var productList = myProductRepo.AsQueryable().Where(x => x.IsDeleted && x.Quantity >= 1).Take(10).ToList();
-
+            //ürünler
+            var productList = myProductRepo.AsQueryable()
+                .Where(x => !x.IsDeleted && x.Quantity >= 1).Take(10).ToList();
             List<ProductViewModel> model = new List<ProductViewModel>();
-
             foreach (var item in productList)
             {
-                //mapster: S
-                // model.Add(item.Adapt<ProductViewModel>());
-                //mapster kullanamıyoruz suan.
-
+                //mapster :S 
+                //model.Add(item.Adapt<ProductViewModel>());
                 var product = new ProductViewModel()
                 {
                     Id = item.Id,
@@ -41,13 +40,11 @@ namespace ECommerceLiteUI.Controllers
                     RegisterDate = item.RegisterDate,
                     Price = item.Price,
                     ProductCode = item.ProductCode
-                    //isDeleted alanını view model in içine eklemeyi unuttuk. Çünkü isDeleted alanını daha dün ekledik.
-                    //Viewmodeli geçen hafta oluşturduk.
-
-               };
-
+                    //isDeleted alanını viewmodelin içine eklemeyi unuttuk. Çünkü
+                    // isDeleted alanını daha dün ekledik. Viewmodeli geçen hafta oluşturduk
+                };
                 product.GetCategory();
-                product.GetProductPicture();
+                product.GetProductPictures();
                 model.Add(product);
             }
 
