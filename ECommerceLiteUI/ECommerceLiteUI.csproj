@@ -2365,6 +2365,7 @@
     <Content Include="Views\Shared\_PartialAdminSideBarMenu.cshtml" />
     <Content Include="Views\Shared\_PartialAdminSideBar.cshtml" />
     <Content Include="Views\Shared\_PartialAdminSideBarProducts.cshtml" />
+    <Content Include="Views\Shared\_PartialShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
