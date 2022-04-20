@@ -40,9 +40,9 @@ namespace ECommerceLiteUI.Models
         public double Discount { get; set; }
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public Category CategoryOfProduct { get; set; }
 
-        public List<ProductPicture> ProductPictureList { get; set; }
+        public List<ProductPicture> PicturesOfProduct { get; set; }
             = new List<ProductPicture>();
 
         // Ürün eklenirken ürüne ait resimlere seçilebilir
@@ -53,7 +53,7 @@ namespace ECommerceLiteUI.Models
         {
             if (Id > 0)
             {
-                ProductPictureList = myProductPictureRepo.AsQueryable()
+                PicturesOfProduct = myProductPictureRepo.AsQueryable()
                     .Where(x => x.ProductId == Id).ToList();
             }
         }
@@ -64,48 +64,38 @@ namespace ECommerceLiteUI.Models
             if (CategoryId > 0)
             {
                 //ÖRN: Elektronik kat.--> Akıllı Telefon kat. --> ürün(iphone 13 pro max)
-                Category = myCategoryRepo.GetById(CategoryId);
+                CategoryOfProduct = myCategoryRepo.GetById(CategoryId);
+                CategoryOfProduct.CategoryList = new List<Category>();
                 // Akıllı telefon kat artık elimde!
                 // Akıllı telefon kat. bir üst kategorisi var mı?
                 // ÖRN: Elek--> Akkıl tel --> applegiller
-                if (Category.BaseCategoryId != null
-                    && Category.BaseCategoryId > 0)
+                if (CategoryOfProduct.BaseCategoryId != null
+                    && CategoryOfProduct.BaseCategoryId > 0)
                 {
-                    Category.CategoryList = new List<Category>();
+                    CategoryOfProduct.BaseCategory = myCategoryRepo.GetById
+                        (CategoryOfProduct.BaseCategoryId.Value);
+                    CategoryOfProduct.CategoryList.Add(CategoryOfProduct.BaseCategory);
 
-                    Category.BaseCategory = myCategoryRepo.GetById
-                        (Category.BaseCategoryId.Value);
-                    Category.CategoryList.Add(Category.BaseCategory);
-
-                    //bool isOver = false;
-                    //Category baseCategory = Category.BaseCategory;
-                    //while (!isOver)
-                    //{
-                    //    if (baseCategory.BaseCategoryId > 0)
-                    //    {
-
-                    //        Category.CategoryList.Add(
-                    //            myCategoryRepo.GetById
-                    //            (baseCategory.BaseCategoryId.Value));
-
-                    //        baseCategory = myCategoryRepo.GetById(
-                    //            baseCategory.BaseCategoryId.Value);
-                    //    }
-                    //    else
-                    //    {
-                    //        isOver = true;
-                    //    }
-
-                    //}
-
-                    Category.CategoryList =
-                        Category.CategoryList.OrderBy(x => x.Id).ToList();
-
+                    bool isOver = false;
+                    Category currentBaseCategory = CategoryOfProduct.BaseCategory;
+                    while (!isOver)
+                    {
+                        if (currentBaseCategory.BaseCategoryId != null
+                            && currentBaseCategory.BaseCategoryId > 0)
+                        {
+                            // mevcuttaki ana kategorinin üst kategorisi varmış
+                            // onu alalım
+                            currentBaseCategory = myCategoryRepo.GetById(currentBaseCategory.BaseCategoryId.Value);
+                            CategoryOfProduct.CategoryList.Add(currentBaseCategory);
+                        }
+                        else
+                        {
+                            isOver = true;
+                        }
+                    }
 
                 }
             }
         }
-
-
     }
 }

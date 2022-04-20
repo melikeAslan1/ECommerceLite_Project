@@ -55,10 +55,10 @@
                         <!-- product -->
                         <div class="product">
                             <div class="product-img">
-                                @if (item.ProductPictureList.Count > 0)
+                                @if (item.PicturesOfProduct.Count > 0)
                                 {
                                     <img src="
-                     @item.ProductPictureList.FirstOrDefault().Picture"
+                     @item.PicturesOfProduct.FirstOrDefault().Picture"
                                          alt="@item.ProductName"
                                          width="100" height="250">
                                 }
@@ -76,7 +76,7 @@
 
                             </div>
                             <div class="product-body">
-                                <p class="product-category">@item.Category.CategoryName</p>
+                                <p class="product-category">@item.CategoryOfProduct.CategoryName</p>
                                 <h3 class="product-name"><a href="#">@item.ProductName</a></h3>
                                 <h4 class="product-price">@item.Price ₺ <del class="product-old-price">$990.00</del></h4>
                                 <div class="product-rating">
