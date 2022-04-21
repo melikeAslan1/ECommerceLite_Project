@@ -78,7 +78,19 @@
                             <div class="product-body">
                                 <p class="product-category">@item.CategoryOfProduct.CategoryName</p>
                                 <h3 class="product-name"><a href="#">@item.ProductName</a></h3>
-                                <h4 class="product-price">@item.Price ₺ <del class="product-old-price">$990.00</del></h4>
+
+                                @if (item.Discount > 0)
+                                {
+                                    decimal salePrice = item.Price - (item.Price * (decimal)(item.Discount) / 100);
+                                    <h4 class="product-price">@salePrice ₺<del class="product-old-price">@item.Price</del></h4>
+                                }
+                                else
+                                {
+                                    <h4 class="product-price">@item.Price ₺</h4>
+                                }
+
+
+
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
