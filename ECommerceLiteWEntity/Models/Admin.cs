@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceLiteEntity.Models
 {
-    [Table("Admin")]
+    [Table("Admins")]
    public class Admin: PersonBase
     {
         // Identity Model ile bize verilen tablodaki Id buraya foreignKey olacaktır.

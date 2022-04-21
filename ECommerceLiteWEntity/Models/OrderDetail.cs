@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceLiteEntity.Models
 {
-    [Table("Order Details")]
+    [Table("OrderDetails")]
     public class OrderDetail: Base<int>
     {
         //İlişkiler
