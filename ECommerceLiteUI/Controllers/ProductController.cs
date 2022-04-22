@@ -26,8 +26,7 @@ namespace ECommerceLiteUI.Controllers
         public ActionResult ProductList(int? page = 1, string search = "")
         {
             //Alt Kategorileri repo aracılığıyla dbden çektik
-            ViewBag.SubCategories = myCategoryRepo
-                     .AsQueryable().Where(x => x.BaseCategoryId != null).ToList();
+            ViewBag.SubCategories = GetSubCategories();
 
             // Sayfaya bazı bilgiler göndereceğiz
             var totalProduct = myProductRepo.GetAll().Count; // toplam ürün sayısı
@@ -94,8 +93,7 @@ namespace ECommerceLiteUI.Controllers
             //Linq
             //select * from Categories where BaseCategoryId is not null
 
-            myCategoryRepo.AsQueryable().Where(x => x.BaseCategoryId != null)
-                .ToList().ForEach(x => subCategories.Add(
+            GetSubCategories().ForEach(x => subCategories.Add(
                     new SelectListItem()
                     {
                         Text = x.CategoryName,
@@ -115,8 +113,7 @@ namespace ECommerceLiteUI.Controllers
             try
             {
                 List<SelectListItem> subCategories = new List<SelectListItem>();
-                myCategoryRepo.AsQueryable().Where(x => x.BaseCategoryId != null)
-                    .ToList().ForEach(x => subCategories.Add(
+                GetSubCategories().ForEach(x => subCategories.Add(
                         new SelectListItem()
                         {
                             Text = x.CategoryName,
@@ -338,6 +335,34 @@ namespace ECommerceLiteUI.Controllers
                 TempData["EditFailed"] = "Beklenmedik bir hata nedeniyle ürün bilgileri güncellenemedi!";
                 return RedirectToAction("ProductList", "Product");
             }
+
+           
+        }
+        public List<Category> GetSubCategories()
+        {
+            //Alt kategorisi olmasına rağmen Product ekleme sayfasındaki comboya gelen kategoriler var. Bu bugı bir metot ekleyerek çözümledik.
+            //Metotta kategorinin  idsi kategori tablosunda basecategoryId alanında geçiyorsa continue ile o kategoriyi atladık ve listemize almadık.
+            //Böylece sadece çocuk kategoriler gelecektir.Ebeveyn kategoriler sayfaya gelemeyecektir.
+
+
+            //eğer caterpo.asq().where(x => x.bas == id)
+            //continue;
+            List<Category> returnList = new List<Category>();
+            var categoryList = myCategoryRepo.AsQueryable().Where(x => x.BaseCategoryId != null).ToList();
+            foreach (var item in categoryList)
+            {
+                if (myCategoryRepo.AsQueryable().Count(x => x.BaseCategoryId == item.Id) > 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    returnList.Add(item);
+                }
+            }
+
+
+            return returnList;
         }
     }
 }
