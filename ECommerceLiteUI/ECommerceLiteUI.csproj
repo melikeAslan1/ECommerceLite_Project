@@ -182,6 +182,7 @@
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemVariableManaging\SystemVariables.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLTE\build\config\postcss.config.js" />
@@ -2376,6 +2377,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Utilities\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Partials\" />
   </ItemGroup>

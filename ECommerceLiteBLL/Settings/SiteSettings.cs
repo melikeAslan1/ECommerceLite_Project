@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using ECommerceLiteUtilities;
 
 
 namespace ECommerceLiteBLL.Settings
@@ -15,9 +16,13 @@ namespace ECommerceLiteBLL.Settings
     {
         // To do: Mail adresini webconfig dosyasından çekmeyi de öğrenelim.
 
-        public static string SiteMail { get; set; } = "nayazilim303@gmail.com";
+        //public static string SiteMail { get; set; } = "nayazilim303@gmail.com";
 
-        public static string SiteMailPassword { get; set; } = "betul303303";
+        //public static string SiteMail { get; set; } = ECommerceLiteUtilities.Utility.DefaultProjectEmail;
+
+        public static string SiteMail { get; set; } =Utility.DefaultProjectEmail;
+
+        public static string SiteMailPassword { get; set; } = "betul303303";  // bu şekilde stringler acık şekilde yazılması istenmiyor bu sebeple utility kullandık. 
 
         public static string SiteMailSmtpHost { get; set; } = "smtp.gmail.com";
         public static int SiteMailSmtpPort { get; set; } = 587;

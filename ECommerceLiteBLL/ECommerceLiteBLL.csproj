@@ -96,6 +96,10 @@
       <Project>{e4b22262-70c5-464b-a2d1-d94224ec3fef}</Project>
       <Name>ECommerceLiteDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ECommerceLiteUtilities\ECommerceLiteUtilities.csproj">
+      <Project>{99992bc4-1328-4d4f-a042-998ea28102f1}</Project>
+      <Name>ECommerceLiteUtilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ECommerceLiteWEntity\ECommerceLiteEntity.csproj">
       <Project>{595910f1-55f9-42b9-aee1-c97695ca2497}</Project>
       <Name>ECommerceLiteEntity</Name>
