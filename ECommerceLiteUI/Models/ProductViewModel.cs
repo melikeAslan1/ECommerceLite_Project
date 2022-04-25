@@ -40,6 +40,22 @@ namespace ECommerceLiteUI.Models
         public double Discount { get; set; }
         public int CategoryId { get; set; }
 
+        private decimal _salePrice;
+        public decimal SalePrice //read only
+        {        
+            get
+            {
+                //matematik ürün fiyatı-(ürün fiyatı * indirim/100)
+                decimal _salePrice = Price -
+                    (
+                    Price * (Convert.ToDecimal(Discount) / 100)
+                    );
+                return _salePrice;
+            }      
+        }
+
+        
+
         public Category CategoryOfProduct { get; set; }
 
         public List<ProductPicture> PicturesOfProduct { get; set; }
