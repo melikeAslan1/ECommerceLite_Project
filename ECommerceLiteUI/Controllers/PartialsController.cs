@@ -38,6 +38,12 @@ namespace ECommerceLiteUI.Controllers
             }
             else
             {
+                foreach (var item in shoppingCart)
+                {
+                    item.GetProductPictures();
+                }
+                //yada  linq foreach ile daha kısa işlem yapabilirsiniz.
+                //shoppingCart.Foreach(x=> x.GetProductPictures());
                 return PartialView("_PartialShoppingCart", shoppingCart);
             }
         }
