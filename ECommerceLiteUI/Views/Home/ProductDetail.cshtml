@@ -1,0 +1,121 @@
+﻿@using ECommerceLiteUI.Models
+@model ProductViewModel
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a href="/Home/Index">Home</a></li>
+
+                    @foreach (var item in Model.CategoryList)
+                    {
+                        <li><a href="#">@item.CategoryName</a></li>
+                    }
+
+
+                    <li class="active">@Model.ProductName</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+
+                    @foreach (var item in Model.PicturesOfProduct)
+                    {
+                        <div class="product-preview">
+                            <img src="@item.Picture" alt="@Model.ProductName">
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product thumb imgs -->
+            <div class="col-md-2  col-md-pull-5">
+                <div id="product-imgs">
+
+                    @foreach (var item in Model.PicturesOfProduct)
+                    {
+                        <div class="product-preview">
+                            <img src="@item.Picture" alt="@Model.ProductName">
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <!-- /Product thumb imgs -->
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">@Model.ProductName</h2>
+                    <div>
+                        <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+
+                    </div>
+                    <div>
+                        @if (Model.Discount > 0)
+                        {
+                            <h3 class="product-price">@Model.SalePrice <del class="product-old-price">@Model.Price ₺</del></h3>
+                        }
+                        else
+                        {
+                            <h3 class="product-price">@Model.Price ₺</h3>
+                        }
+                        <span class="product-available">Stok : @Model.Quantity</span>
+                    </div>
+                    <p>@Model.Description</p>
+
+
+                    <div class="add-to-cart">
+                        <div class="qty-label">
+                            Qty
+                            <div class="input-number">
+                                <input type="number">
+                                <span class="qty-up">+</span>
+                                <span class="qty-down">-</span>
+                            </div>
+                        </div>
+                        <a href="/Home/AddToCart/@Model.Id"
+                           class="add-to-cart-btn">
+                            Sepete Ekle
+                        </a>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
