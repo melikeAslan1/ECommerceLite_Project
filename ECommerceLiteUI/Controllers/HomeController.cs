@@ -325,7 +325,7 @@ namespace ECommerceLiteUI.Controllers
                         await SiteSettings.SendMail(new MailModel()
                         {
 
-                            To = "nayazilim303@gmail.com",
+                            To = "303asms@gmail.com",
                             Subject = "ACİL - ECommerceLite 303 Sipariş Detay Sorunu",
                             Message = message
 

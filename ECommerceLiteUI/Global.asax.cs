@@ -80,8 +80,8 @@ namespace ECommerceLiteUI
                         Name = "303",
                         Surname = "Admin",
                         RegisterDate = DateTime.Now,
-                        Email = "nayazilim303@gmail.com",
-                        UserName = "nayazilim303@gmail.com",
+                        Email = "303asms@gmail.com",
+                        UserName = "303asms@gmail.com",
                         IsDeleted = false,
                         EmailConfirmed = true
                     };

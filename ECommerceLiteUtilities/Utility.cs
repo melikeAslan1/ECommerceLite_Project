@@ -8,8 +8,8 @@ namespace ECommerceLiteUtilities
 {
   public static class Utility
     {
-        public static string DefaultProjectEmail = "nayazilim303@gmail.com";
-        public static string DefaultProjectEmailPassword = "betul303303";
+        public static string DefaultProjectEmail = "303asms@gmail.com";
+        public static string DefaultProjectEmailPassword = "ezgi1234";
 
 
 
